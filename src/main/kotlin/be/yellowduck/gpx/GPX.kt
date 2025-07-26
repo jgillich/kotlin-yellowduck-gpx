@@ -83,8 +83,6 @@ class GPX {
 
             } catch (e: SAXParseException) {
                 throw GPXDocumentException()
-            } catch (e: Exception) {
-                throw GPXDocumentException()
             }
 
             return gpx
