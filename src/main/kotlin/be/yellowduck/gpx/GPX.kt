@@ -134,8 +134,8 @@ class GPX {
 
         private fun parseTrackPoint(node: Node): TrackPoint {
 
-            var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            var parsedDate = LocalDateTime.parse(node.firstChildByName("time")?.textContent ?: "", formatter)
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+            val parsedDate = node.firstChildByName("time")?.textContent?.let { LocalDateTime.parse( it, formatter) }
 
             return TrackPoint(
                 lat = node.doubleAttribute("lat"),
