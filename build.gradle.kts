@@ -17,7 +17,7 @@ val myLicenseUrl = "https://raw.githubusercontent.com/pieterclaerhout/kotlin-yel
 val myDeveloperName = "Pieter Claerhout"
 
 plugins {
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "2.1.21"
     kotlin("plugin.serialization") version "1.5.0"
     id("org.jetbrains.dokka") version "1.4.32"
     `maven-publish`
@@ -40,6 +40,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
 }
 
 tasks.withType<KotlinCompile> {
