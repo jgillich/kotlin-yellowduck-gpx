@@ -13,8 +13,14 @@ class TCXWriter : IWriter {
      * @param stream The OutputStream to write to
      */
     override fun toStream(gpxFile: GPXFile, stream: OutputStream) {
+        var factory: XMLOutputFactory
+        try {
+            factory = XMLOutputFactory.newFactory()
+        } catch (_: NoSuchMethodError) {
+            factory = XMLOutputFactory.newInstance()
+        }
 
-        val writer = IndentingXMLStreamWriter(XMLOutputFactory.newFactory().createXMLStreamWriter(stream, "UTF-8"))
+        val writer = IndentingXMLStreamWriter(factory.createXMLStreamWriter(stream, "UTF-8"))
         writer.setIndentStep("  ")
 
         var previousPoint: TrackPoint? = null
