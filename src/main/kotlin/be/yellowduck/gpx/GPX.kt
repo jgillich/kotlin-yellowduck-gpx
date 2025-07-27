@@ -73,6 +73,7 @@ class GPX {
                     throw GPXDocumentException()
                 }
 
+                gpx.name = parseName(doc)
                 gpx.version = parseVersion(doc)
                 gpx.creator = parseCreator(doc)
 
@@ -87,6 +88,12 @@ class GPX {
 
             return gpx
 
+        }
+
+        private fun parseName(doc: org.w3c.dom.Document): String {
+             return doc.getElementsByTagName("metadata").items().firstOrNull()?.let { metadata ->
+               metadata.childNodes.itemsByName("name").firstOrNull()?.textContent
+            } ?: ""
         }
 
         private fun parseVersion(doc: org.w3c.dom.Document): String {

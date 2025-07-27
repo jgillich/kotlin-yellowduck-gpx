@@ -117,6 +117,7 @@ class ParserTests {
     @Test
     fun testTrackSimple() {
         val gpx = GPX.parse("src/test/resources/test_track_simple.gpx")
+        assertThat(gpx.name).isEqualTo("foo")
         assertThat(gpx.tracks.size).isEqualTo(1)
         assertThat(gpx.tracks.first().segments.size).isEqualTo(1)
         assertThat(gpx.tracks.first().segments.first().points.size).isEqualTo(2)
