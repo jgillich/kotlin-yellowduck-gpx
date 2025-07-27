@@ -1,4 +1,4 @@
-package be.yellowduck.gpx;
+package be.yellowduck.gpx
 
 /**
  * A segment is a sorted list of waypoints.
@@ -26,14 +26,14 @@ data class Segment(
         }
 
     /**
-     * Returns the segment as a encoded polyline string.
+     * Returns the segment as an encoded polyline string.
      *
      * [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
      *
      * @return A string with the encoded polyline
      */
     fun toPolyline(): String {
-        return Polyline.encode(points);
+        return Polyline.encode(points)
     }
 
 }

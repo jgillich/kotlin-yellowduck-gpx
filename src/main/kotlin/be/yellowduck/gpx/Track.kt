@@ -22,7 +22,7 @@ data class Track(
         }
 
     /**
-     * Returns the segment as a encoded polyline string.
+     * Returns the segment as an encoded polyline string.
      *
      * [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
      *
@@ -33,7 +33,7 @@ data class Track(
         segments.forEach {
             coords.addAll(it.points)
         }
-        return Polyline.encode(coords);
+        return Polyline.encode(coords)
     }
 
 }
