@@ -26,6 +26,23 @@ data class Segment(
         }
 
     /**
+     * Returns the total elevation gain of the segment
+     */
+    val elevationGain: Double
+        get() {
+            var total = 0.0
+            points.forEachIndexed { index, point ->
+                if (index > 0) {
+                    val ele = points[index].ele - points[index - 1].ele
+                    if (ele > 0) {
+                        total += ele
+                    }
+                }
+            }
+            return total
+        }
+
+    /**
      * Returns the segment as an encoded polyline string.
      *
      * [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)

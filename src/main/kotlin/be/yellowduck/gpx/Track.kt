@@ -22,6 +22,14 @@ data class Track(
         }
 
     /**
+     * Returns the total elevation gain of the track
+     */
+    val elevationGain: Double
+        get() {
+            return segments.sumOf { it.elevationGain }
+        }
+
+    /**
      * Returns the segment as an encoded polyline string.
      *
      * [Encoded Polyline Algorithm Format](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
