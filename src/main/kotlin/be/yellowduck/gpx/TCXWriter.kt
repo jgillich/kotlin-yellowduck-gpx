@@ -54,6 +54,15 @@ class TCXWriter : IWriter {
                                                 element("LatitudeDegrees", point.lat.toString())
                                                 element("LongitudeDegrees", point.lon.toString())
                                             }
+
+                                            if (point.ele != 0.0) {
+                                                element("AltitudeMeters", point.ele.toString())
+                                            }
+
+                                            point.time?.let { time ->
+                                                element("Time", point.time.toString())
+                                            }
+
                                             val distance: Double = previousPoint?.distanceTo(point)?.meters ?: 0.0
                                             element("DistanceMeters", distance.toString())
                                             previousPoint = point

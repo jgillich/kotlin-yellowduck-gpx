@@ -3,6 +3,7 @@ package be.yellowduck.gpx
 import com.sun.xml.txw2.output.IndentingXMLStreamWriter
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
+import java.time.temporal.ChronoUnit
 import javax.xml.stream.XMLOutputFactory
 
 class GPXWriter : IWriter {
@@ -53,6 +54,14 @@ class GPXWriter : IWriter {
                                     element("trkpt") {
                                         attribute("lat", point.lat.toString())
                                         attribute("lon", point.lon.toString())
+
+                                        if (point.ele != 0.0) {
+                                            element("ele", point.ele.toString())
+                                        }
+
+                                        point.time?.let { time ->
+                                            element("time", time.truncatedTo(ChronoUnit.SECONDS).toString())
+                                        }
                                     }
                                 }
                             }

@@ -82,7 +82,7 @@ class GPX {
                     gpx.tracks.add(track)
                 }
 
-            } catch (e: SAXParseException) {
+            } catch (_: SAXParseException) {
                 throw GPXDocumentException()
             }
 
@@ -91,8 +91,8 @@ class GPX {
         }
 
         private fun parseName(doc: org.w3c.dom.Document): String {
-             return doc.getElementsByTagName("metadata").items().firstOrNull()?.let { metadata ->
-               metadata.childNodes.itemsByName("name").firstOrNull()?.textContent
+            return doc.getElementsByTagName("metadata").items().firstOrNull()?.let { metadata ->
+                metadata.childNodes.itemsByName("name").firstOrNull()?.textContent
             } ?: ""
         }
 
@@ -140,9 +140,9 @@ class GPX {
         }
 
         private fun parseTrackPoint(node: Node): TrackPoint {
-
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            val parsedDate = node.firstChildByName("time")?.textContent?.let { LocalDateTime.parse( it, formatter) }
+            val parsedDate = node.firstChildByName("time")?.textContent?.let {
+                LocalDateTime.parse(it, DateTimeFormatter.ISO_DATE_TIME)
+            }
 
             return TrackPoint(
                 lat = node.doubleAttribute("lat"),

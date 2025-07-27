@@ -53,4 +53,30 @@ class TrackPointTests {
 
     }
 
+    @Test
+    fun trackPointSerialize() {
+        val point = TrackPoint()
+        point.lat = 48.1969
+        point.lon = 16.34528
+        point.ele = 2.6
+        point.time = now
+
+        val gpx = GPX.parse(
+            GPXFile(
+                tracks = mutableListOf(
+                    Track(
+                        segments = mutableListOf(
+                            Segment(
+                                points = mutableListOf(point)
+                            )
+                        )
+                    )
+                )
+            ).toString().toByteArray().inputStream()
+        )
+
+        assertThat(gpx.tracks.firstOrNull()?.segments?.firstOrNull()?.points?.first()).isEqualTo(point)
+    }
+
+
 }
