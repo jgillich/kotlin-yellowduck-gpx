@@ -1,5 +1,7 @@
 package be.yellowduck.gpx
 
+import kotlinx.serialization.Serializable
+
 /**
  * A track is sorted list of segments.
  *
@@ -8,6 +10,7 @@ package be.yellowduck.gpx
  *
  * @since v1.0.0
  */
+@Serializable
 data class Track(
     val name: String = "",
     val segments: MutableList<Segment> = mutableListOf()

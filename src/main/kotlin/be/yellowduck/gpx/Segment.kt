@@ -1,5 +1,7 @@
 package be.yellowduck.gpx
 
+import kotlinx.serialization.Serializable
+
 /**
  * A segment is a sorted list of waypoints.
  *
@@ -7,6 +9,7 @@ package be.yellowduck.gpx
  *
  * @since v1.0.0
  */
+@Serializable
 data class Segment(
     val points: MutableList<TrackPoint> = mutableListOf()
 ) {
