@@ -1,13 +1,16 @@
 package be.yellowduck.gpx
 
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 class TrackPointTests {
 
-    val now = LocalDateTime.ofEpochSecond(1621174415, 0, ZoneOffset.UTC)
+    @OptIn(ExperimentalTime::class)
+    val now = Instant.fromEpochSeconds(1621174415, 0).toLocalDateTime(TimeZone.UTC)
 
     @Test
     fun newTrackPointConstructor() {

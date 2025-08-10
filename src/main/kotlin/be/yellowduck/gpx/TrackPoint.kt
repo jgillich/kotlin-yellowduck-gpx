@@ -2,7 +2,7 @@ package be.yellowduck.gpx
 
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
+import kotlinx.datetime.LocalDateTime
 import kotlin.math.*
 
 /**

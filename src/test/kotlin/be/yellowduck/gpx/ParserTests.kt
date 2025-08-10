@@ -1,6 +1,8 @@
 package be.yellowduck.gpx
 
 import com.sun.net.httpserver.HttpServer
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -8,7 +10,7 @@ import java.io.File
 import java.net.HttpURLConnection
 import java.net.InetSocketAddress
 import java.net.URL
-import java.time.ZoneOffset
+import kotlin.time.ExperimentalTime
 
 class ParserTests {
 
@@ -67,6 +69,7 @@ class ParserTests {
 
     }
 
+    @OptIn(ExperimentalTime::class)
     @Test
     fun testParserFile() {
 
@@ -94,7 +97,7 @@ class ParserTests {
         assertThat(point.lat).isEqualTo(51.003349)
         assertThat(point.lon).isEqualTo(3.804193)
         assertThat(point.ele).isEqualTo(2.6)
-        assertThat(point.time?.toEpochSecond(ZoneOffset.UTC)).isEqualTo(1600587025)
+        assertThat(point.time?.toInstant(TimeZone.UTC)?.epochSeconds).isEqualTo(1600587025)
 
     }
 

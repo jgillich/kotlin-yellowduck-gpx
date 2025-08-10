@@ -1,15 +1,18 @@
 package be.yellowduck.gpx
 
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import org.w3c.dom.Node
 import org.xml.sax.InputSource
 import java.io.FileInputStream
 import java.io.InputStream
 import java.net.URL
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.xml.parsers.DocumentBuilderFactory
 //import khttp.get
 import org.xml.sax.SAXParseException
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 /**
  * This class can be used to parse an existing GPX file.
@@ -139,9 +142,14 @@ class GPX {
             return segment
         }
 
+        @OptIn(ExperimentalTime::class)
         private fun parseTrackPoint(node: Node): TrackPoint {
             val parsedDate = node.firstChildByName("time")?.textContent?.let {
-                LocalDateTime.parse(it, DateTimeFormatter.ISO_DATE_TIME)
+                try {
+                    Instant.parse(it).toLocalDateTime(TimeZone.UTC)
+                } catch (_: IllegalArgumentException) {
+                    LocalDateTime.parse(it)
+                }
             }
 
             return TrackPoint(

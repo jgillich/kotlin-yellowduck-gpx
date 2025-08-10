@@ -60,7 +60,7 @@ class GPXWriter : IWriter {
                                         }
 
                                         point.time?.let { time ->
-                                            element("time", time.truncatedTo(ChronoUnit.SECONDS).toString())
+                                            element("time", time.toString())
                                         }
                                     }
                                 }
